@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Library } from 'src/app/models/library/library.model';
+import { Library } from 'src/app/library/models/library.model';
 
 @Component({
   selector: 'app-library-card',
@@ -7,7 +7,8 @@ import { Library } from 'src/app/models/library/library.model';
   styleUrls: ['./library-card.component.scss']
 })
 export class LibraryCardComponent {
-  @Input() library!: Library;
+  @Input()
+  public library!: Library;
 
   public formatFieldName(fieldName: string): string {
     const fieldMap: { [key: string]: string } = {

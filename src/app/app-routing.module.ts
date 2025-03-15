@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LibrarySearchComponent } from './components/library-search/library-search.component';
 
-const routes: Routes = [
-  {path: "", component: LibrarySearchComponent}
-];
+const routes: Routes = [ 
+  { 
+    path: '', 
+    loadChildren: () => 
+      import('./library/library.module').then((m) => m.LibraryModule), 
+  },
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { LibraryService } from '../../services/library/library.service';
+import { LibraryService } from '../../services/library.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { take } from 'rxjs';
-import { Library } from 'src/app/models/library/library.model';
+import { Library } from 'src/app/library/models/library.model';
 
 @Component({
   selector: 'app-library-search',
@@ -16,10 +16,10 @@ export class LibrarySearchComponent implements OnInit {
   public selectedLibrary: Library | null = null;
 
   constructor(
-    private libraryService: LibraryService, 
-    private fb: FormBuilder, 
+    private _libraryService: LibraryService, 
+    private _fb: FormBuilder, 
   ) {
-    this.form = this.fb.group({
+    this.form = this._fb.group({
       inputValue: [''],
     })
   }
@@ -32,7 +32,7 @@ export class LibrarySearchComponent implements OnInit {
     this.isLoading = true;
     this.libraries = [];
     this.selectedLibrary = null;
-    this.libraryService.getData(this.form.get('inputValue')?.value).pipe(take(1))
+    this._libraryService.getData(this.form.get('inputValue')?.value).pipe(take(1))
       .subscribe((data: Library[]) => {
         this.isLoading = false;
         this.libraries = data;

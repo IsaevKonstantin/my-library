@@ -32,16 +32,18 @@ export class Version {
 
 export interface LibraryData {
     Number: number;
-    Cells: {
-        FullName: string;
-        ObjectAddress: string[];
-        CommonName: string;
-        WebSite: string;
-        ChiefPosition: string;
-        ChiefName: string;
-        Email: string[];
-        PublicPhone: string[];
-    }
+    Cells: Cell;
+}
+
+export interface Cell {
+    FullName: string;
+    ObjectAddress: string[];
+    CommonName: string;
+    WebSite: string;
+    ChiefPosition: string;
+    ChiefName: string;
+    Email: string[];
+    PublicPhone: string[];
 }
 
 export interface VersionData {
