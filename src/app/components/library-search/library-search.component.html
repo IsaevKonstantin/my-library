@@ -1,0 +1,59 @@
+<div class="library-search-container">
+  <div class="library-search-header">
+    <div class="library-search-title">
+      <span class="text-title">Библиотеки г.Москва</span>
+    </div>
+    <div class="library-search-section">
+      <div class="input-container">
+        <form class="b-form" [formGroup]="form">
+          <tui-input formControlName="inputValue" [tuiTextfieldCleaner]="true">
+            Наименование библиотеки
+            <input
+              tuiTextfield
+              type="text"
+              [placeholder]="'Введите значение'"
+            />
+          </tui-input>
+        </form>
+      </div>
+      <div class="button-container">
+        <button tuiButton [showLoader]="isLoading" [disabled]="isLoading" (click)="searchLibraries()">Поиск</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="library-search-data">
+    <ng-container *ngIf="libraries.length; else notFoundLibraries">
+      <div class="library-search-table">
+        <table>
+          <thead>
+            <tr>
+              <th [style.min-width]="'30px'">№ п/п</th>
+              <th>Наименование</th>
+              <th>Адрес</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let library of libraries">
+              <tr class="library-search-row" (click)="selectLibrary(library)">
+                <td>{{ library.number }}</td>
+                <td [innerHTML]="highlightText(library.fullName)"></td>
+                <td>{{ library.objectAddress }}</td>
+              </tr>
+              <tr *ngIf="!!selectedLibrary && selectedLibrary.number === library.number">
+                <td colspan="3">
+                  <app-library-card [library]="library"></app-library-card>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+    <ng-template #notFoundLibraries>
+      <div class="library-search-title">
+        <span class="text-body">Воспользуйтесь формой поиска</span>
+      </div>
+    </ng-template>
+  </div>
+</div>

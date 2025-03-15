@@ -1,0 +1,13 @@
+<div class="library-card">
+    <ng-container *ngFor="let item of library | keyvalue">
+        <div class="library-card-item" *ngIf="!['number', 'fullName', 'objectAddress'].includes(item.key)">
+            <span class="text-title">{{ formatFieldName(item.key) }}:</span>
+            <ng-container *ngIf="item.key !== 'webSite'; else webSite">
+                <span class="text-body">{{ item.value }}</span>
+            </ng-container>
+            <ng-template #webSite>
+                <a class="text-href" [href]="'https://' + item.value">{{ item.value }}</a>
+            </ng-template>
+        </div>
+    </ng-container>
+</div>
